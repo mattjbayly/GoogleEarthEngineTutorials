@@ -1,0 +1,11 @@
+var dataset = ee.ImageCollection("UQ/murray/Intertidal/v1_1/global_intertidal");
+
+var layer = dataset.select('classification');
+var band_viz = {
+  min: 0.0,
+  max: 0.00005,
+  opacity: 1.0,
+  palette: ["black", "blue", "purple", "cyan", "green", "yellow", "red"]
+};
+Map.addLayer(layer, band_viz, 'Global Intertidal');
+

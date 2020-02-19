@@ -1,0 +1,41 @@
+// Load in the Can DEM dataset
+var dataset = ee.ImageCollection('NRCan/CDEM');
+var mmelevation = dataset.select('elevation');
+
+// Get correct tile from CDEM Dataset on Geogratis
+// Filter the table geographically: only watersheds in the continental US.
+var elev = ee.Image('NRCan/CDEM/082G');
+print(elev);
+
+// Calculate hillshae
+var azimuth = 270;
+var elevation = 30;
+var hillshade = ee.Terrain.hillshade(elev, azimuth, elevation);
+
+// Calculate slope
+var myslope = ee.Terrain.slope(elev);
+print(myslope);
+// Apply slope filter
+var myslopefilter = myslope.gt(38);
+
+
+// Plot layers onto the map
+Map.setCenter(-115.11631826534767,49.47647441238688, 12);
+
+// Add hillshade layer to map 
+Map.addLayer(hillshade);
+
+// Add slope layer to map 
+Map.addLayer(myslope.updateMask(myslopefilter), {min:0, max:100, palette: ['00FFFF']});
+
+
+
+// Optional elev everywhere
+var elevationVis = {
+  min: -50.0,
+  max: 1500.0,
+  palette: ['0905ff', 'ffefc4', 'ffffff'],
+};
+//Map.addLayer(mmelevation, elevationVis, 'Elevation');
+
+

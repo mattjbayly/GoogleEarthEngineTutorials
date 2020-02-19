@@ -1,0 +1,25 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var geometry = /* color: #d63000 */ee.Geometry.Point([-110.70733893707086, 64.55476154319818]);
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+//var dataset = ee.ImageCollection('LANDSAT/LC08/C01/T1_32DAY_NDWI')
+//                  .filterDate('2017-01-01', '2017-12-31');
+
+//var imageCollection = ee.ImageCollection("LANDSAT/LT05/C01/T1_TOA");
+
+// Use ee.Filter.calendarRange to filter by year and month
+var imageCollection = ee.ImageCollection('LANDSAT/LC08/C01/T1_32DAY_NDWI');
+var dataset = imageCollection.filter(ee.Filter.calendarRange(2010,2017,'year'))
+.filter(ee.Filter.calendarRange(7,8,'month'));
+
+print(dataset);
+
+
+
+var colorized = dataset.select('NDWI');
+var colorizedVis = {
+  min: 0.0,
+  max: 1.0,
+  palette: ['0000ff', '00ffff', 'ffff00', 'ff0000', 'ffffff'],
+};
+Map.setCenter(-110.70733893707086,64.55476154319818, 12);
+Map.addLayer(colorized, colorizedVis, 'Colorized');

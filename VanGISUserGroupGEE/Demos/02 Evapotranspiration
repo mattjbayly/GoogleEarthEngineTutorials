@@ -1,0 +1,21 @@
+
+
+var collection = ee.ImageCollection("CAS/IGSNRR/PML/V2");
+print(collection);
+
+var image = ee.Image("CAS/IGSNRR/PML/V2/2017-06-02");
+print(image);
+
+// Define the visualization parameters.
+var vizParams = {
+  bands: ['Ec'],
+  min: 0,
+  max: 200
+};
+
+var ndwiViz = {bands: ['GPP'], min: 0.5, max: 10, palette: ['0000FF', 'ffff66', 'ff0000']};
+
+
+Map.addLayer(image, ndwiViz);
+
+

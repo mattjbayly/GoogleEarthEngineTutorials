@@ -1,0 +1,161 @@
+// https://storage.googleapis.com/global-surface-water/downloads_ancillary/DataUsersGuidev2.pdf
+//0 No observations
+//1 Not water
+//2 Seasonal water
+//3 Permanent water
+
+//JRC/GSW1_0/GlobalSurfaceWater
+//JRC/GSW1_0/YearlyHistory
+//var gsw = ee.ImageCollection("JRC/GSW1_1/YearlyHistory")
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2018');
+var occurrence = gsw.select('waterClass');
+
+//////////////////////////////////////////////////////////////
+// Initialize Map Location
+//////////////////////////////////////////////////////////////
+
+Map.setCenter(-126.8695153645154,50.53059147357546, 14);
+
+var VIS_OCCURRENCE = {
+    min:0,
+    max:3,
+    palette: ['red', 'yellow','green','blue']
+};
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2018');
+print(gsw);
+var occurrence2018 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence2018
+});
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2017');
+print(gsw);
+var occurrence2017 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence2017
+});
+
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2016');
+print(gsw);
+var occurrence2016 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence2016
+});
+
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2015');
+print(gsw);
+var occurrence2015 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence2015
+});
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2014');
+print(gsw);
+var occurrence2014 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence2014
+});
+
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2013');
+print(gsw);
+var occurrence2013 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence2013
+});
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2010');
+print(gsw);
+var occurrence2010 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence2010
+});
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2005');
+print(gsw);
+var occurrence2005 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence2005
+});
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2000');
+print(gsw);
+var occurrence2000 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence2000
+});
+
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/1995');
+print(gsw);
+var occurrence1995 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence1995
+});
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/1990');
+print(gsw);
+var occurrence1990 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence1990
+});
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/1986');
+print(gsw);
+var occurrence1986 = gsw.select('waterClass');
+Map.addLayer({
+  visParams: VIS_OCCURRENCE,
+  eeObject: occurrence1986
+});
+
+
+/*
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2015');
+print(gsw);
+var occurrence2017 = gsw.select('waterClass');
+Map.addLayer({
+  eeObject: occurrence2017
+});
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2010');
+print(gsw);
+var occurrence2017 = gsw.select('waterClass');
+Map.addLayer({
+  eeObject: occurrence2017
+});
+
+
+var gsw = ee.Image('JRC/GSW1_1/YearlyHistory/2005');
+print(gsw);
+var occurrence2016 = gsw.select('waterClass');
+Map.addLayer({
+  eeObject: occurrence2016
+});
+
+*/

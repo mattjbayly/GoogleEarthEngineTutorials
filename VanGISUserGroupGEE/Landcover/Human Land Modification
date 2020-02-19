@@ -1,0 +1,8 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var geometry = /* color: #d63000 */ee.Geometry.Point([-114.91273579865202, 50.04436853494255]);
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+var dataset = ee.Image("CSP/HM/GlobalHumanModification/2016")
+print(dataset);
+var landCover = dataset.select('gHM');
+Map.setCenter(-111.27671,64.66917, 3);
+Map.addLayer(landCover, {}, 'Land Cover');

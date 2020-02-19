@@ -1,0 +1,36 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var geometry = /* color: #d63000 */ee.Geometry.MultiPoint(
+        [[-111.4179483082425, 60.41519138386051],
+         [-114.87487425392698, 49.759862793788336]]);
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+// Load Sentinel-1 images to map Seine-et-Marne flooding, France, May-June 2016.
+// This script was originally written by Simon Ilyushchenko (GEE team)
+
+// Default location
+var pt = ee.Geometry.Point(-114.87487425392698,49.759862793788336);
+// Grand Morin near Coulommiers
+
+// Load Sentinel-1 C-band SAR Ground Range collection (log scaling, VV co-polar)
+var collection = ee.ImageCollection('COPERNICUS/S1_GRD')
+.filterBounds(pt)
+.filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV'))
+.select('VV');
+
+// Filter by date
+var before = collection.filterDate('2016-04-01', '2016-06-30').mosaic();
+var after = collection.filterDate('2019-07-01', '2019-09-15').mosaic();
+
+// Threshold smoothed radar intensities to identify "flooded" areas.
+var SMOOTHING_RADIUS = 100; 
+var DIFF_UPPER_THRESHOLD = -3;
+var diff_smoothed = after.focal_median(SMOOTHING_RADIUS, 'circle', 'meters')
+.subtract(before.focal_median(SMOOTHING_RADIUS, 'circle', 'meters'));
+var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
+
+// Display map
+
+Map.centerObject(pt, 13);
+Map.addLayer(before, {min:-30,max:0}, 'Before flood');
+Map.addLayer(after, {min:-30,max:0}, 'After flood');
+Map.addLayer(after.subtract(before), {min:-10,max:10}, 'After - before', 0);
+Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0);
